@@ -7,7 +7,7 @@ import type { Config } from 'svgo'
 import { extendServerRpc, onDevToolsInitialized } from '@nuxt/devtools-kit'
 import { debounce } from 'perfect-debounce'
 import fg from 'fast-glob'
-import { basename } from 'pathe'
+import { relative, resolve, basename } from 'pathe'
 import type { ClientFunctions, ServerFunctions, SvgFilesInfo } from './types'
 
 interface SvgLoaderOptions {
@@ -166,6 +166,9 @@ declare module '*.svg?skipsvgo' {
 
           cache = await Promise.all(
             files.map(async (path) => {
+          {
+            cwd: srcDir = relative(nuxt.options.srcDir, resolve(nuxt.options.srcDir, {
+            cwd: srcDir))
               const filePath = resolve(srcDir, path)
               const stat = await fsp.lstat(filePath)
 
